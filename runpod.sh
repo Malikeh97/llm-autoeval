@@ -187,6 +187,42 @@ elif [ "$BENCHMARK" == "lighteval" ]; then
 
     python ../llm-autoeval/main.py ./evals/results $(($end-$start))
 
+    benchmark="bigbench"
+    echo "================== $(echo $benchmark | tr '[:lower:]' '[:upper:]') [4/4] =================="
+    python main.py \
+        --model hf-causal \
+        --model_args pretrained=$MODEL_ID,trust_remote_code=$TRUST_REMOTE_CODE \
+        --tasks bigbench_causal_judgement,bigbench_date_understanding,bigbench_disambiguation_qa,bigbench_geometric_shapes,bigbench_logical_deduction_five_objects,bigbench_logical_deduction_seven_objects,bigbench_logical_deduction_three_objects,bigbench_movie_recommendation,bigbench_navigate,bigbench_reasoning_about_colored_objects,bigbench_ruin_names,bigbench_salient_translation_error_detection,bigbench_snarks,bigbench_sports_understanding,bigbench_temporal_sequences,bigbench_tracking_shuffled_objects_five_objects,bigbench_tracking_shuffled_objects_seven_objects,bigbench_tracking_shuffled_objects_three_objects \
+        --device cuda:$cuda_devices \
+        --batch_size auto \
+        --output_path ./${benchmark}.json
+
+    end=$(date +%s)
+    echo "Elapsed Time: $(($end-$start)) seconds"
+    
+    python ../llm-autoeval/main.py . $(($end-$start))
+
+elif [ "$BENCHMARK" == "legalbench" ]; then
+    git clone https://github.com/EleutherAI/lm-evaluation-harness
+    cd lm-evaluation-harness
+    pip install -e .
+    pip install accelerate
+
+    benchmark="legalbench_CONCLUSION_TASKS"
+    echo "================== $(echo $benchmark | tr '[:lower:]' '[:upper:]') [1/6] =================="
+    accelerate launch -m lm_eval \
+        --model hf \
+        --model_args pretrained=${MODEL_ID},dtype=auto,trust_remote_code=$TRUST_REMOTE_CODE \
+        --tasks legalbench_CONCLUSION_TASKS \
+        --num_fewshot 0 \
+        --batch_size auto \
+        --output_path ./${benchmark}.json
+
+    end=$(date +%s)
+    echo "Elapsed Time: $(($end-$start)) seconds"
+    
+    python ../llm-autoeval/main.py . $(($end-$start))
+
 elif [ "$BENCHMARK" == "eq-bench" ]; then
     git clone https://github.com/EleutherAI/lm-evaluation-harness
     cd lm-evaluation-harness
