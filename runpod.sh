@@ -216,7 +216,7 @@ elif [ "$BENCHMARK" == "legalbench" ]; then
     accelerate launch -m lm_eval \
         --model hf \
         --model_args pretrained=${MODEL_ID},dtype=auto,trust_remote_code=$TRUST_REMOTE_CODE \
-        --tasks legalbench_CONCLUSION_TASKS \
+        --tasks legalbench_abercrombie_multiple_choice \
         --num_fewshot 0 \
         --batch_size auto \
         --output_path ./${benchmark}.json
