@@ -208,7 +208,6 @@ elif [ "$BENCHMARK" == "legalbench" ]; then
     pip install -e .
     pip install accelerate
 
-    benchmark="legalbench_CONCLUSION_TASKS"
     echo "================== $(echo $benchmark | tr '[:lower:]' '[:upper:]') [1/6] =================="
     accelerate launch -m lm_eval \
         --model hf \
@@ -216,7 +215,7 @@ elif [ "$BENCHMARK" == "legalbench" ]; then
         --tasks legalbench_CONCLUSION_TASKS \
         --num_fewshot 0 \
         --batch_size auto \
-        --output_path ./${benchmark}.json
+        --output_path ./legalbench_conclusion_tasks.json
 
     end=$(date +%s)
     echo "Elapsed Time: $(($end-$start)) seconds"
