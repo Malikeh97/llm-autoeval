@@ -204,8 +204,8 @@ elif [ "$BENCHMARK" == "lighteval" ]; then
 
 elif [ "$BENCHMARK" == "legalbench" ]; then
     git clone https://github.com/EleutherAI/lm-evaluation-harness
-    git clone https://github.com/arcee-ai/arcee-eval.git
-    cp arcee-eval/tasks/* lm-evaluation-harness/lm_eval/tasks/
+    git clone https://github.com/Malikeh97/llm-autoeval.git
+    cp llm-autoeval/tasks/* lm-evaluation-harness/lm_eval/tasks/
     
     cd lm-evaluation-harness
     pip install -e .
