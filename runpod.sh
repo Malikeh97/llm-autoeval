@@ -205,7 +205,7 @@ elif [ "$BENCHMARK" == "lighteval" ]; then
 elif [ "$BENCHMARK" == "legalbench" ]; then
     git clone https://github.com/EleutherAI/lm-evaluation-harness
     mkdir lm-evaluation-harness/lm_eval/tasks/legalbench
-    cp lm_eval/tasks/legalbench/* lm-evaluation-harness/lm_eval/tasks/legalbench/
+    cp tasks/legalbench/* lm-evaluation-harness/lm_eval/tasks/legalbench/
     
     cd lm-evaluation-harness
     pip install -e .
