@@ -204,7 +204,7 @@ elif [ "$BENCHMARK" == "lighteval" ]; then
 
 elif [ "$BENCHMARK" == "legalbench" ]; then
     git clone https://github.com/arcee-ai/arcee-eval.git
-    cd lm-evaluation-harness
+    cd arcee-eval
     pip install -e .
     pip install accelerate
 
