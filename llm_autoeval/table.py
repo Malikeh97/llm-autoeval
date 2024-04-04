@@ -52,6 +52,10 @@ def calculate_average(data, task):
         elif task == "truthfulqa":
             value = data["results"]["truthfulqa_mc"]["mc2"]
             return 0.0 if math.isnan(value) else value * 100
+    
+    elif BENCHMARK == "legalbench":
+        if task == "legalbench_conclusion_tasks":
+            return data["results"]["legalbench_conclusion_tasks"]["acc,none"] * 100
 
     raise NotImplementedError(f"Could not find task {task} for benchmark {BENCHMARK}")
 
