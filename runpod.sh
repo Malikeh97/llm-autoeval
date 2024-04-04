@@ -204,8 +204,8 @@ elif [ "$BENCHMARK" == "lighteval" ]; then
 
 elif [ "$BENCHMARK" == "legalbench" ]; then
     git clone https://github.com/EleutherAI/lm-evaluation-harness
-    mkdir lm-evaluation-harness/lm_eval/tasks/legalbench
-    cp tasks/legalbench/* lm-evaluation-harness/lm_eval/tasks/legalbench/
+    git clone https://github.com/arcee-ai/arcee-eval.git
+    cp arcee-eval/tasks/* lm-evaluation-harness/lm_eval/tasks/
     
     cd lm-evaluation-harness
     pip install -e .
@@ -216,7 +216,7 @@ elif [ "$BENCHMARK" == "legalbench" ]; then
     accelerate launch -m lm_eval \
         --model hf \
         --model_args pretrained=${MODEL_ID},dtype=auto,trust_remote_code=$TRUST_REMOTE_CODE \
-        --tasks legalbench_abercrombie_multiple_choice \
+        --tasks legalbench_CONCLUSION_TASKS \
         --num_fewshot 0 \
         --batch_size auto \
         --output_path ./${benchmark}.json
