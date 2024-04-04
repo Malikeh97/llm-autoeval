@@ -101,7 +101,7 @@ def main(directory: str, elapsed_time: float) -> None:
     elif BENCHMARK == "eq-bench":
         summary = _make_eqbench_summary(directory, elapsed_time)
     elif BENCHMARK == "legalbench":
-        summary = _make_eqbench_summary(directory, elapsed_time)    
+        summary = _make_autoeval_summary(directory, elapsed_time)    
     else:
         raise NotImplementedError(
             f"BENCHMARK should be 'openllm' or 'nous' (current value = {BENCHMARK})"
