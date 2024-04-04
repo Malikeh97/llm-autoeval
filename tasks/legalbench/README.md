@@ -93,7 +93,7 @@ Homepage: https://hazyresearch.stanford.edu/legalbench/
 * `legalbench_RULE_TASKS`: Rule-recall tasks which require the LLM to generate the correct legal rule on an issue in a jurisdiction (e.g., the rule for hearsay in US federal court), or answer a question about what the law in a jurisdiction does/does not permit.
 * `legalbench_conclusion_tasks`: Rule-conclusion tasks which require an LLM to determine the legal outcome of a set of facts under a specified rule.
 * `legalbench_INTERPRETATION_TASKS`: Interpretation tasks which require the LLM to parse and understand a legal text (e.g., classifying contractual clauses).
-* `legalbench_RHETORIC_TASKS`: Rhetorical-understanding tasks which require an LLM to reason about legal argumentation and analysis (e.g., identifying textualist arguments).
+* `legalbench_rhetoric_tasks`: Rhetorical-understanding tasks which require an LLM to reason about legal argumentation and analysis (e.g., identifying textualist arguments).
 
 #### Tasks
 * `abercrombie`: Determine the Abercrombie classification for a mark/product pair.
