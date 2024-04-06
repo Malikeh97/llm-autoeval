@@ -202,6 +202,7 @@ elif [ "$BENCHMARK" == "lighteval" ]; then
     
     python ../llm-autoeval/main.py . $(($end-$start))
 
+
 elif [ "$BENCHMARK" == "legalbench" ]; then
     git clone https://github.com/EleutherAI/lm-evaluation-harness
     git clone https://github.com/Malikeh97/llm-autoeval.git
@@ -211,12 +212,52 @@ elif [ "$BENCHMARK" == "legalbench" ]; then
     pip install -e .
     pip install accelerate
 
+    benchmark="legalbench_issue_tasks" 
+    echo "================== $(echo $benchmark | tr '[:lower:]' '[:upper:]') [1/6] =================="
+    accelerate launch -m lm_eval \
+        --model hf \
+        --model_args pretrained=${MODEL_ID},dtype=auto,trust_remote_code=$TRUST_REMOTE_CODE \
+        --tasks legalbench_issue_tasks \
+        --num_fewshot 0 \
+        --batch_size auto \
+        --output_path ./${benchmark}.json
+
+    benchmark="legalbench_rule_tasks" 
+    echo "================== $(echo $benchmark | tr '[:lower:]' '[:upper:]') [1/6] =================="
+    accelerate launch -m lm_eval \
+        --model hf \
+        --model_args pretrained=${MODEL_ID},dtype=auto,trust_remote_code=$TRUST_REMOTE_CODE \
+        --tasks legalbench_rule_tasks \
+        --num_fewshot 0 \
+        --batch_size auto \
+        --output_path ./${benchmark}.json
+
     benchmark="legalbench_conclusion_tasks" 
     echo "================== $(echo $benchmark | tr '[:lower:]' '[:upper:]') [1/6] =================="
     accelerate launch -m lm_eval \
         --model hf \
         --model_args pretrained=${MODEL_ID},dtype=auto,trust_remote_code=$TRUST_REMOTE_CODE \
         --tasks legalbench_conclusion_tasks \
+        --num_fewshot 0 \
+        --batch_size auto \
+        --output_path ./${benchmark}.json
+
+    benchmark="legalbench_interpretation_tasks" 
+    echo "================== $(echo $benchmark | tr '[:lower:]' '[:upper:]') [1/6] =================="
+    accelerate launch -m lm_eval \
+        --model hf \
+        --model_args pretrained=${MODEL_ID},dtype=auto,trust_remote_code=$TRUST_REMOTE_CODE \
+        --tasks legalbench_interpretation_tasks \
+        --num_fewshot 0 \
+        --batch_size auto \
+        --output_path ./${benchmark}.json
+
+    benchmark="legalbench_rhetoric_tasks" 
+    echo "================== $(echo $benchmark | tr '[:lower:]' '[:upper:]') [1/6] =================="
+    accelerate launch -m lm_eval \
+        --model hf \
+        --model_args pretrained=${MODEL_ID},dtype=auto,trust_remote_code=$TRUST_REMOTE_CODE \
+        --tasks legalbench_rhetoric_tasks \
         --num_fewshot 0 \
         --batch_size auto \
         --output_path ./${benchmark}.json
