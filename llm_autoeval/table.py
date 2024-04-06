@@ -54,9 +54,16 @@ def calculate_average(data, task):
             return 0.0 if math.isnan(value) else value * 100
     
     elif BENCHMARK == "legalbench":
-        if task == "legalbench_conclusion_tasks":
+        if task == "legalbench_issue_tasks":
+            return data["results"]["legalbench_issue_tasks"]["acc,none"] * 100
+        elif task == "legalbench_rule_tasks":
+            return data["results"]["legalbench_rule_tasks"]["acc,none"] * 100
+        elif task == "legalbench_conclusion_tasks":
             return data["results"]["legalbench_conclusion_tasks"]["acc,none"] * 100
-
+        elif task == "legalbench_interpretation_tasks":
+            return data["results"]["legalbench_interpretation_tasks"]["acc,none"] * 100
+        elif task == "legalbench_rhetoric_tasks":
+            return data["results"]["legalbench_rhetoric_tasks"]["acc,none"] * 100
     raise NotImplementedError(f"Could not find task {task} for benchmark {BENCHMARK}")
 
 
