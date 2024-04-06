@@ -26,7 +26,7 @@ def _make_autoeval_summary(directory: str, elapsed_time: float) -> str:
     elif BENCHMARK == "nous":
         tasks = ["AGIEval", "GPT4All", "TruthfulQA", "Bigbench"]
     elif BENCHMARK == "legalbench":
-        tasks = ["legalbench_conclusion_tasks"]
+        tasks = ["legalbench_issue_tasks", "legalbench_rule_tasks", "legalbench_conclusion_tasks", "legalbench_interpretation_tasks", "legalbench_rhetoric_tasks"]
     else:
         raise NotImplementedError(
             f"BENCHMARK should be 'openllm' or 'nous' (current value = {BENCHMARK})"
