@@ -288,7 +288,7 @@ elif [ "$BENCHMARK" == "eq-bench" ]; then
     python ../llm-autoeval/main.py ./evals/results $(($end-$start))
 
 else
-    echo "Error: Invalid BENCHMARK value. Please set BENCHMARK to 'nous', 'openllm', or 'lighteval'."
+    echo "Error: Invalid BENCHMARK value. Please set BENCHMARK to 'nous', 'openllm', 'lighteval', or 'legalbench'."
 fi
 
 if [ "$DEBUG" == "False" ]; then
