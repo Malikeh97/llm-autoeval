@@ -156,7 +156,7 @@ elif [ "$BENCHMARK" == "openllm" ]; then
 elif [ "$BENCHMARK" == "lighteval" ]; then
     git clone https://github.com/huggingface/lighteval.git
     cd lighteval 
-    pip install '.[accelerate,quantization,adapters]'
+    pip install '.[accelerate,quantization,adapters,openai]'
     num_gpus=$(nvidia-smi --query-gpu=count --format=csv,noheader | head -n 1)
 
     echo "Number of GPUs: $num_gpus"
